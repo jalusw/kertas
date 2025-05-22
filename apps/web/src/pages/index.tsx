@@ -2,16 +2,19 @@ import { type FC } from "react";
 import Editor from "../components/editor";
 import useNotesStore from "../stores/useNotesStore";
 import useNotepad from "../hooks/useNotepad";
+import { useNavigate } from "react-router";
 
 const defaultContents = ["<h1>Write your note here...</h1>"];
 
 const Index: FC = () => {
   const { add } = useNotesStore();
+  const navigate = useNavigate();
   const { content, setContent } = useNotepad({
     initialContent: defaultContents[0],
     onSave: (content) => {
+      const id = crypto.randomUUID();
       add({
-        id: crypto.randomUUID(),
+        id,
         title: `Note ${new Date().toLocaleString()}`,
         archived: false,
         bookmarked: false,
@@ -19,6 +22,7 @@ const Index: FC = () => {
         createdAt: new Date(),
         updatedAt: new Date(),
       });
+      navigate(`/${id}`);
     },
   });
   return (

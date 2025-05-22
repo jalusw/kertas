@@ -7,11 +7,13 @@ import {
 import { Box, Flex, IconButton, Text } from "@radix-ui/themes";
 import type { FC } from "react";
 
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import type { Note } from "../types/note";
 import useNotesStore from "../stores/useNotesStore";
+
 const Topbar: FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { notes } = useNotesStore();
   const note = notes.find((note: Note) => note.id === id);
 
@@ -32,7 +34,7 @@ const Topbar: FC = () => {
           color="gray"
           size="4"
           onClick={() => {
-            window.location.href = "/";
+            navigate("/");
           }}
         >
           <Pencil2Icon />

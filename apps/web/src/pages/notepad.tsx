@@ -1,11 +1,12 @@
 import type { FC } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import useNotesStore from "../stores/useNotesStore";
 import Editor from "../components/editor";
 import useNotepad from "../hooks/useNotepad";
 
 const Notepad: FC = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { notes, update } = useNotesStore();
   const { content, setContent } = useNotepad({
     initialContent: notes.find((note) => note.id === id)?.content || "",
@@ -18,10 +19,12 @@ const Notepad: FC = () => {
       }
     },
   });
+
   const note = notes.find((note) => note.id === id);
 
   if (!note) {
-    window.location.href = "/";
+    navigate("/");
+    return null;
   }
 
   return (
