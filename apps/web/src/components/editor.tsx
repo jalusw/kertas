@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { useEffect, type FC } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 
 import Heading from "@tiptap/extension-heading";
@@ -40,6 +40,11 @@ const Editor: FC<EditorProps> = ({ content, onEditCallback }) => {
       },
     },
   });
+
+  useEffect(() => {
+    editor?.commands.setContent(content);
+    editor?.commands.focus();
+  }, [content, editor]);
 
   return <EditorContent editor={editor} />;
 };

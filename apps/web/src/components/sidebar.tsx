@@ -1,6 +1,6 @@
 import { useEffect, type FC, useState } from "react";
 import useNotesStore from "../stores/useNotesStore";
-import { Link } from "react-router";
+import { NavLink, useParams } from "react-router";
 
 import {
   Box,
@@ -54,6 +54,7 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
   const [search, setSearch] = useState("");
   const [collapsed, setCollapsed] = useState(false);
   const { notes, handleDelete, handleArchive } = useSidebar();
+  const { id } = useParams();
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
@@ -104,11 +105,13 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
           {notes
             .filter((note) => collapsed || note.title.includes(search))
             .map((note) => (
-              <Link
-                className={`hover:bg-neutral-100 p-2 rounded-md text-sm overflow-hidden text-ellipsis whitespace-nowrap flex items-center ${
+              <NavLink
+                to={`/${note.id}`}
+                className={`${
+                  note.id === id ? "bg-neutral-100 " : "hover:bg-neutral-100"
+                } p-2 rounded-md text-sm overflow-hidden text-ellipsis whitespace-nowrap flex items-center ${
                   collapsed ? "justify-center" : "justify-between"
                 }`}
-                to={`/${note.id}`}
                 key={note.id}
               >
                 {collapsed ? (
@@ -137,7 +140,7 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
                     </ContextMenu.Content>
                   </ContextMenu.Root>
                 )}
-              </Link>
+              </NavLink>
             ))}
         </Flex>
       </Box>
