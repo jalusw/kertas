@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@import "radix-themes-tw";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@plugin "@tailwindcss/typography";
+
+.ProseMirror:focus {
+  outline: none;
+}
+
+.radix-themes {
+  --default-font-family: "Geist Sans", sans-serif;
+}

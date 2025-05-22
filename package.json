@@ -1,0 +1,15 @@
+{
+  "name": "kertas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start-client": "yarn workspace @kertas/web dev",
+    "clean": "rimraf **/*/node_modules"
+  },
+  "author": "Jalu Satriani Wijaya <jalusatrianiwijaya1@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ]
+}

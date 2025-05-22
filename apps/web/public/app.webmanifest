@@ -1,0 +1,9 @@
+{
+  "name": "Kertas",
+  "short_name": "Kertas",
+  "description": "Kertas is a simple note-taking app that allows you to create and manage your notes.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000"
+}
