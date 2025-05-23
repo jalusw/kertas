@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 
 import Index from "../pages";
-import Notepad from "../pages/notepad";
+
 import Layout from "../components/layout";
 const router = createBrowserRouter([
   {
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/:id",
-        element: <Notepad />,
+        element: <Index />,
       },
     ],
   },

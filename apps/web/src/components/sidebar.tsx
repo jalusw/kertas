@@ -1,27 +1,29 @@
 import { useEffect, type FC, useState } from "react";
 import useNotesStore from "../stores/useNotesStore";
-import { NavLink, useParams } from "react-router";
+import { NavLink, useNavigate, useParams } from "react-router";
 
 import {
   Box,
+  Button,
   ContextMenu,
   Flex,
   IconButton,
   Text,
-  TextField,
 } from "@radix-ui/themes";
 
 import {
   ArchiveIcon,
   FileTextIcon,
   InfoCircledIcon,
-  MagnifyingGlassIcon,
   PinLeftIcon,
   PinRightIcon,
+  PlusIcon,
   TrashIcon,
 } from "@radix-ui/react-icons";
 
 const useSidebar = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const { notes, remove, archive } = useNotesStore();
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -35,8 +37,11 @@ const useSidebar = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const handleDelete = (id: string) => {
-    remove(id);
+  const handleDelete = (targetId: string) => {
+    remove(targetId);
+    if (targetId === id) {
+      navigate("/");
+    }
   };
 
   const handleArchive = (id: string) => {
@@ -51,23 +56,63 @@ type SidebarProps = {
 };
 
 const Sidebar: FC<SidebarProps> = ({ className }) => {
-  const [search, setSearch] = useState("");
+  const [search] = useState("");
   const [collapsed, setCollapsed] = useState(false);
   const { notes, handleDelete, handleArchive } = useSidebar();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
   };
 
   return (
-    <nav className="hidden sm:block">
+    <nav className="hidden md:block">
       <Box
-        className={`flex flex-col gap-2 p-4 h-full bg-white border-r border-neutral-200 transition-all duration-300 ${className} ${
+        className={`flex flex-col gap-2 p-4 h-full bg-white border-r border-neutral-200 transition-all duration-300  ${className} ${
           collapsed ? "w-16" : "w-64"
         }`}
       >
-        <Flex justify="between" align="stretch" gap="2">
+        <Flex justify="between" align="center">
+          <Flex align="center" gap="2">
+            {!collapsed && <Text as="span">Kertas</Text>}
+          </Flex>
+          <Flex align="center" gap="2">
+            <IconButton variant="outline" onClick={toggleSidebar}>
+              {collapsed ? <PinRightIcon /> : <PinLeftIcon />}
+            </IconButton>
+          </Flex>
+        </Flex>
+        <Flex width="100%" mt="4" justify="center" style={{ width: "100%" }}>
+          {collapsed ? (
+            <IconButton
+              variant="outline"
+              className="w-full"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <PlusIcon />
+            </IconButton>
+          ) : (
+            <Button
+              variant="outline"
+              style={{ width: "100%" }}
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              <PlusIcon />
+              <Text as="span">New Note</Text>
+            </Button>
+          )}
+        </Flex>
+        {/* <Flex
+          justify="between"
+          align="stretch"
+          gap="2"
+          className="hidden md:flex"
+        >
           {!collapsed && (
             <Box flexBasis="1">
               <TextField.Root
@@ -84,7 +129,7 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
           <IconButton variant="outline" onClick={toggleSidebar}>
             {collapsed ? <PinRightIcon /> : <PinLeftIcon />}
           </IconButton>
-        </Flex>
+        </Flex> */}
         <Flex mt="4" direction="column" gap="1">
           {!collapsed && notes.length === 0 && (
             <Flex
@@ -109,7 +154,7 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
                 to={`/${note.id}`}
                 className={`${
                   note.id === id ? "bg-neutral-100 " : "hover:bg-neutral-100"
-                } p-2 rounded-md text-sm overflow-hidden text-ellipsis whitespace-nowrap flex items-center ${
+                } p-2 rounded-md text-sm overflow-hidden text-ellipsis whitespace-nowrap flex items-center  ${
                   collapsed ? "justify-center" : "justify-between"
                 }`}
                 key={note.id}
