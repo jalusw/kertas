@@ -36,7 +36,7 @@ const Topbar: FC = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 onBlur={() => setIsEditing(false)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter") {
+                  if ((e.key === "Enter") || ((e.ctrlKey || e.metaKey) && e.key == 's')) {
                     setIsEditing(false);
                     update(id ?? "", {
                       ...note,

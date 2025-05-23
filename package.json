@@ -1,9 +1,10 @@
 {
-  "name": "kertas",
+  "name": "zero",
+  "description": "Monorepo for personal projects.",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start-client": "yarn workspace @kertas/web dev",
+    "start-client": "yarn workspace @zero/web dev",
     "clean": "rimraf **/*/node_modules"
   },
   "author": "Jalu Satriani Wijaya <jalusatrianiwijaya1@gmail.com>",

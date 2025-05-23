@@ -83,30 +83,6 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
             </IconButton>
           </Flex>
         </Flex>
-        <Flex width="100%" mt="4" justify="center" style={{ width: "100%" }}>
-          {collapsed ? (
-            <IconButton
-              variant="outline"
-              className="w-full"
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              <PlusIcon />
-            </IconButton>
-          ) : (
-            <Button
-              variant="outline"
-              style={{ width: "100%" }}
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              <PlusIcon />
-              <Text as="span">New Note</Text>
-            </Button>
-          )}
-        </Flex>
         {/* <Flex
           justify="between"
           align="stretch"
