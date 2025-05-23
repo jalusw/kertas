@@ -1,29 +1,4 @@
-# Kertas
+# .
 
-Kertas is a personal knowledge management that utilize LLM capabilities to help you capture, organize, and retrieve information.
+This repository is monorepo for my personal softwar engineering projects, it utilize yarn workspace to manage it.
 
-## Getting Started
-
-Pre requisites:
-
-- yarn
-- node
-- docker
-
-Install dependencies:
-
-```bash
-yarn install
-```
-
-Run the web client :
-
-```bash
-yarn workspace web dev
-```
-
-Run the server:
-
-```bash
-yarn workspace server dev
-```
