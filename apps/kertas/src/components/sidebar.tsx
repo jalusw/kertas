@@ -2,14 +2,7 @@ import { useEffect, type FC, useState } from "react";
 import useNotesStore from "../stores/useNotesStore";
 import { NavLink, useNavigate, useParams } from "react-router";
 
-import {
-  Box,
-  Button,
-  ContextMenu,
-  Flex,
-  IconButton,
-  Text,
-} from "@radix-ui/themes";
+import { Box, ContextMenu, Flex, IconButton, Text } from "@radix-ui/themes";
 
 import {
   ArchiveIcon,
@@ -17,7 +10,6 @@ import {
   InfoCircledIcon,
   PinLeftIcon,
   PinRightIcon,
-  PlusIcon,
   TrashIcon,
 } from "@radix-ui/react-icons";
 
@@ -60,7 +52,7 @@ const Sidebar: FC<SidebarProps> = ({ className }) => {
   const [collapsed, setCollapsed] = useState(false);
   const { notes, handleDelete, handleArchive } = useSidebar();
   const { id } = useParams();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setCollapsed(!collapsed);
